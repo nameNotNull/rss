@@ -1,0 +1,48 @@
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://satis.beike.tools/"
+    },
+    {
+      "packagist": false
+    }
+  ],
+  "config": {
+    "secure-http": false,
+    "preferred-install": "dist"
+  },
+  "autoload": {
+    "classmap": [
+      "application/plugins/"
+    ],
+    "psr-0": {
+      "Test": "tests/",
+      "Dao": "application/models/",
+      "Service": "application/models/",
+      "Enums": "application/library/"
+    }
+  },
+  "require": {
+    "monolog/monolog": "1.19.0",
+    "hashids/hashids": "^1.0",
+    "firebase/php-jwt": "v5.0.0",
+    "illuminate/database": "v5.2.32",
+    "illuminate/validation": "v5.2.32",
+    "realsee/composer": "master-dev",
+    "guzzlehttp/guzzle": "6.2.3",
+    "phpunit/phpunit": "6.0.8",
+    "ext-yaf": "~3.0",
+    "ext-redis": "*",
+    "php-curl-class/php-curl-class": "4.11.0",
+    "bacon/bacon-qr-code": "1.0.1",
+    "aws/aws-sdk-php": "3.23.2",
+    "symfony/console": "^3.2",
+    "squizlabs/php_codesniffer": "^2.8"
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "find vendor/ -type d -name .git | xargs rm -rf"
+    ]
+  }
+}

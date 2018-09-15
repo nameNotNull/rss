@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+define('ROOT_PATH', __DIR__.'/../../../..');
+define('APPLICATION_PATH', ROOT_PATH . '/application');
+define('CONTROLLER_PATH', APPLICATION_PATH . '/controllers');
+define('MODEL_PATH', APPLICATION_PATH . '/models');
+define('VENDOR_PATH', ROOT_PATH . '/vendor');
+
+require VENDOR_PATH . '/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->add(new MobileApi\Util\Command\CodeSnifferCommand());
+
+$application->run();

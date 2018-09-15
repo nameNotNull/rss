@@ -1,0 +1,10 @@
+<phpunit bootstrap="./index.php" convertNoticesToExceptions="true">
+    <testsuites>
+        <testsuite name="controller">
+            <directory suffix=".php">Test/Controllers</directory>
+        </testsuite>
+        <testsuite name="library">
+            <directory suffix=".php">Test/Libraries</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# PHP CodeSniffer pre-commit hook for git
+
+echo -e "PHP CodeSniffer pre-commit hook start!\n"
+
+FILES=$(git diff-index --name-only --cached --diff-filter=ACMR HEAD -- )
+
+if [ "$FILES" == "" ]; then
+    exit 0
+fi
+
+#match vendor and composer.lock
+HAVE_VENDOR=0
+HAVE_COMPOSER_LOCK=0
+for FILE in $FILES
+do
+    if [ "$HAVE_VENDOR" -eq 0 ]
+    then
+        if [[ "$FILE" =~  ^vendor\/ ]]
+        then
+            HAVE_VENDOR=1
+        fi
+    fi
+
+    if [ "$HAVE_COMPOSER_LOCK" -eq 0 ]
+    then
+        if [[ "$FILE" =~ composer\.lock ]]
+        then
+            HAVE_COMPOSER_LOCK=1
+        fi
+    fi
+done
+
+if [ "$HAVE_VENDOR" -eq 1 -a "$HAVE_COMPOSER_LOCK" -eq 0 ]
+then
+    echo "Must use composer to update vendor folder!"
+    exit 1
+fi
+
+CONFIG_FILES=$(diff -B <(find ./config/ -name '*.ini' | xargs grep '^\[product-aws' | awk -F ':' '{print $1}') <(find ./config/ -name '*.ini' | xargs grep '^\[product' | grep -v '\[product-aws' | awk -F ':' '{print $1}'))
+if [ "$CONFIG_FILES" != "" ]
+then
+    echo -e "config file is wrong!\n"
+    echo $CONFIG_FILES
+    exit 1
+fi
+
+# match files against whitelist
+FILES_TO_CHECK=""
+for FILE in $FILES
+do
+    echo "$FILE" | egrep -v "^vendor\/"| egrep "\.php$"
+    RESULT=$?
+    if [ "$RESULT" -eq "0" ]
+    then
+        FILES_TO_CHECK="$FILES_TO_CHECK $FILE"
+    fi
+done
+
+if [ "$FILES_TO_CHECK" == "" ]; then
+    echo -e "Nothing to check\n"
+    exit 0
+fi
+
+OUTPUT= vendor/bin/assistant cs $FILES_TO_CHECK
+
+RESULT=$?
+
+if [ "$RESULT" -ne 0 ]; then
+    echo $OUTPUT | less
+fi
+
+exit $RESULT

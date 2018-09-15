@@ -1,0 +1,26 @@
+{
+  "name": "realsee/composer",
+  "description": "mobile api ,intergate api、util、exception",
+  "keywords": [
+    "api",
+    "util",
+    "exception"
+  ],
+  "homepage": "http://git.lianjia.com/vrlab_server/composer.git",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "role": "Developer"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "MobileApi\\Api\\": "api/",
+      "MobileApi\\Util\\": "util/",
+      "MobileApi\\Exception\\": "exception/"
+    }
+  }
+}
