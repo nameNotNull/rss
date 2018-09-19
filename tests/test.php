@@ -5,8 +5,7 @@
  * 3、测试案例
  *
  *
-// */
-//namespace App\tests;
+**/
 ini_set('yaf.name_separator', '_');
 require_once __DIR__ . '/../vendor/autoload.php';
 define("ROOT_PATH", dirname(__DIR__) . "/");
