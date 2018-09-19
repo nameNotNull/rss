@@ -36,3 +36,4 @@ class Service_Test_Model extends Service_Base_Model
         return $list->toArray();
     }
 }
+

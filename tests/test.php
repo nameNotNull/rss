@@ -24,10 +24,11 @@ class YafTest extends TestCase
         $application = new Yaf\Application(ROOT_PATH . "/config/application.ini",'develop');
         $application->bootstrap();
         Yaf\Registry::set('application', $application);
-        $this->assertEquals(1,Service_Test_Model::getInstance()->getListByUserId('123'));
+        $data = Service_Test_Model::getInstance()->getListByUserId('123');
+        $this->assertEquals(1,$data[0]['id']);
         $stub = $this->createMock(Service_Test_Model::class);
-        $stub->method('get')->willReturn(3);                     //2
-        $this->assertEquals(3,$stub->get(1));
+        $stub->method('getListByUserId')->willReturn(3);                     //2
+        $this->assertEquals(3,$stub->getListByUserId(1));
     }
     public function Log()
     {
