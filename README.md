@@ -163,9 +163,9 @@ php /data/www/develop/initial_project/htdocs/console.php request_uri="/console/s
 
 > 修改 swagger-ui/dist 目录下 index.html 指定的json文件为上一步生成的openapi.json文件
 
-![https://github.com/nameNotNull/initial_project/blob/master/resources/swagger_index.png](https://github.com/nameNotNull/initial_project/blob/master/resources/swagger_index.png)
+![https://github.com/nameNotNull/initial_project/blob/master/resources/swagger_index.png](https://github.com/nameNotNull/initial_project/blob/master/resource/swagger_index.png)
 
-![https://github.com/nameNotNull/initial_project/blob/master/resources/swagger.png](https://github.com/nameNotNull/initial_project/blob/master/resources/swagger.png)
+![https://github.com/nameNotNull/initial_project/blob/master/resources/swagger.png](https://github.com/nameNotNull/initial_project/blob/master/resource/swagger.png)
 
 
 
@@ -177,7 +177,7 @@ php ./vendor/bin/phpunit tests/test.php
 ```
 >执行结果如下
 
-![https://github.com/nameNotNull/initial_project/blob/master/resources/phpunit.png](https://github.com/nameNotNull/initial_project/blob/master/resources/phpunit.png)
+![https://github.com/nameNotNull/initial_project/blob/master/resources/phpunit.png](https://github.com/nameNotNull/initial_project/blob/master/resource/phpunit.png)
 
 
 
