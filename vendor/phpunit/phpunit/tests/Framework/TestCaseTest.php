@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -10,6 +10,7 @@
 
 namespace PHPUnit\Framework;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Runner\BaseTestRunner;
 
 class TestCaseTest extends TestCase
@@ -615,7 +616,7 @@ class TestCaseTest extends TestCase
         $mock = $this->createMock(\Mockable::class);
 
         $this->assertInstanceOf(\Mockable::class, $mock);
-        $this->assertInstanceOf(\PHPUnit_Framework_MockObject_MockObject::class, $mock);
+        $this->assertInstanceOf(MockObject::class, $mock);
     }
 
     public function testCreateMockMocksAllMethods()

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -23,7 +23,7 @@ class Filter
      * @param \Throwable $e
      * @param bool       $asString
      *
-     * @return string
+     * @return string|string[]
      */
     public static function getFilteredStacktrace($e, $asString = true)
     {

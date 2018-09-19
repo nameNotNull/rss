@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -25,6 +25,15 @@ class LogicalAnd extends Constraint
      * @var Constraint
      */
     protected $lastConstraint;
+
+    public static function fromConstraints(Constraint ...$constraints): self
+    {
+        $constraint = new self;
+
+        $constraint->constraints = \array_values($constraints);
+
+        return $constraint;
+    }
 
     /**
      * @param Constraint[] $constraints
@@ -73,6 +82,7 @@ class LogicalAnd extends Constraint
         foreach ($this->constraints as $constraint) {
             if (!$constraint->evaluate($other, $description, true)) {
                 $success = false;
+
                 break;
             }
         }

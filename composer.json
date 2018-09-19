@@ -5,6 +5,10 @@
       "url": "http://10.26.15.92:8888/"
     },
     {
+      "type": "composer",
+      "url": "https://packagist.org"
+    },
+    {
       "packagist": false
     }
   ],
@@ -31,7 +35,7 @@
     "illuminate/validation": "v5.2.32",
     "realsee/composer": "master-dev",
     "guzzlehttp/guzzle": "6.2.3",
-    "phpunit/phpunit": "6.4.0",
+    "phpunit/phpunit": "6.5.0",
     "ext-yaf": "~3.0",
     "ext-redis": "*",
     "php-curl-class/php-curl-class": "4.11.0",

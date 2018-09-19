@@ -1870,17 +1870,17 @@
     },
     {
         "name": "phpunit/phpunit",
-        "version": "6.4.0",
-        "version_normalized": "6.4.0.0",
+        "version": "6.5.0",
+        "version_normalized": "6.5.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "a1bcaca096998de32c29535fdd2dea0c475e8f61"
+            "reference": "9582244325db2dda80ee8bd920c3f353b0b6329d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1bcaca096998de32c29535fdd2dea0c475e8f61",
-            "reference": "a1bcaca096998de32c29535fdd2dea0c475e8f61",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9582244325db2dda80ee8bd920c3f353b0b6329d",
+            "reference": "9582244325db2dda80ee8bd920c3f353b0b6329d",
             "shasum": ""
         },
         "require": {
@@ -1894,12 +1894,12 @@
             "phar-io/version": "^1.0",
             "php": "^7.0",
             "phpspec/prophecy": "^1.7",
-            "phpunit/php-code-coverage": "^5.2.2",
-            "phpunit/php-file-iterator": "^1.4.2",
+            "phpunit/php-code-coverage": "^5.2.3",
+            "phpunit/php-file-iterator": "^1.4.3",
             "phpunit/php-text-template": "^1.2.1",
             "phpunit/php-timer": "^1.0.9",
-            "phpunit/phpunit-mock-objects": "^4.0.3",
-            "sebastian/comparator": "^2.0.2",
+            "phpunit/phpunit-mock-objects": "^5.0",
+            "sebastian/comparator": "^2.1",
             "sebastian/diff": "^2.0",
             "sebastian/environment": "^3.1",
             "sebastian/exporter": "^3.1",
@@ -1919,14 +1919,14 @@
             "ext-xdebug": "*",
             "phpunit/php-invoker": "^1.1"
         },
-        "time": "2017-10-06T03:14:57+00:00",
+        "time": "2017-11-30T16:20:46+00:00",
         "bin": [
             "phpunit"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "6.4.x-dev"
+                "dev-master": "6.5.x-dev"
             }
         },
         "installation-source": "dist",
@@ -1956,39 +1956,39 @@
     },
     {
         "name": "phpunit/phpunit-mock-objects",
-        "version": "4.0.4",
-        "version_normalized": "4.0.4.0",
+        "version": "5.0.10",
+        "version_normalized": "5.0.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-            "reference": "2f789b59ab89669015ad984afa350c4ec577ade0"
+            "reference": "cd1cf05c553ecfec36b170070573e540b67d3f1f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/2f789b59ab89669015ad984afa350c4ec577ade0",
-            "reference": "2f789b59ab89669015ad984afa350c4ec577ade0",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/cd1cf05c553ecfec36b170070573e540b67d3f1f",
+            "reference": "cd1cf05c553ecfec36b170070573e540b67d3f1f",
             "shasum": ""
         },
         "require": {
             "doctrine/instantiator": "^1.0.5",
             "php": "^7.0",
             "phpunit/php-text-template": "^1.2.1",
-            "sebastian/exporter": "^3.0"
+            "sebastian/exporter": "^3.1"
         },
         "conflict": {
             "phpunit/phpunit": "<6.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "^6.0"
+            "phpunit/phpunit": "^6.5.11"
         },
         "suggest": {
             "ext-soap": "*"
         },
-        "time": "2017-08-03T14:08:16+00:00",
+        "time": "2018-08-09T05:50:03+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "4.0.x-dev"
+                "dev-master": "5.0.x-dev"
             }
         },
         "installation-source": "dist",
@@ -2004,7 +2004,7 @@
         "authors": [
             {
                 "name": "Sebastian Bergmann",
-                "email": "sb@sebastian-bergmann.de",
+                "email": "sebastian@phpunit.de",
                 "role": "lead"
             }
         ],

@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -63,7 +63,7 @@ EOF;
     private $testCase;
 
     /**
-     * @var AbstractPhpProcess|\PHPUnit_Framework_MockObject_MockObject
+     * @var AbstractPhpProcess|\PHPUnit\Framework\MockObject\MockObject
      */
     private $phpProcess;
 
