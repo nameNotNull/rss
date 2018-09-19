@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -26,7 +26,7 @@ class FileExists extends Constraint
      */
     protected function matches($other)
     {
-        return file_exists($other);
+        return \file_exists($other);
     }
 
     /**
@@ -41,7 +41,7 @@ class FileExists extends Constraint
      */
     protected function failureDescription($other)
     {
-        return sprintf(
+        return \sprintf(
             'file "%s" exists',
             $other
         );

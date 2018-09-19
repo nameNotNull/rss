@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -7,12 +7,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Util\TestDox\NamePrettifier;
 
-class Util_TestDox_NamePrettifierTest extends TestCase
+namespace PHPUnit\Util\TestDox;
+
+use PHPUnit\Framework\TestCase;
+
+class NamePrettifierTest extends TestCase
 {
-    protected $namePrettifier;
+    /**
+     * @var NamePrettifier
+     */
+    private $namePrettifier;
 
     protected function setUp()
     {

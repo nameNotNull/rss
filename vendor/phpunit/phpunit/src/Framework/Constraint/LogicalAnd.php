@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -24,7 +24,7 @@ class LogicalAnd extends Constraint
     /**
      * @var Constraint
      */
-    protected $lastConstraint = null;
+    protected $lastConstraint;
 
     /**
      * @param Constraint[] $constraints
@@ -116,7 +116,7 @@ class LogicalAnd extends Constraint
         $count = 0;
 
         foreach ($this->constraints as $constraint) {
-            $count += count($constraint);
+            $count += \count($constraint);
         }
 
         return $count;

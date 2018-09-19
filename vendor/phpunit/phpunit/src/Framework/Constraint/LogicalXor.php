@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -113,7 +113,7 @@ class LogicalXor extends Constraint
         $count = 0;
 
         foreach ($this->constraints as $constraint) {
-            $count += count($constraint);
+            $count += \count($constraint);
         }
 
         return $count;

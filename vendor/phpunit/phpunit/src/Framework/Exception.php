@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -75,6 +75,6 @@ class Exception extends \RuntimeException implements \PHPUnit\Exception
 
     public function __sleep()
     {
-        return array_keys(get_object_vars($this));
+        return \array_keys(\get_object_vars($this));
     }
 }

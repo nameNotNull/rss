@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -26,7 +26,7 @@ class DirectoryExists extends Constraint
      */
     protected function matches($other)
     {
-        return is_dir($other);
+        return \is_dir($other);
     }
 
     /**
@@ -41,7 +41,7 @@ class DirectoryExists extends Constraint
      */
     protected function failureDescription($other)
     {
-        return sprintf(
+        return \sprintf(
             'directory "%s" exists',
             $other
         );

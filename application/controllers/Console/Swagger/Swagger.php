@@ -8,6 +8,11 @@
  *     description="接口文档, V1.0.<br>"
  *   ),
  *
+ *   @OA\Server(
+ *     url="http://initial.project.dev.com/",
+ *     description="在线测试Host",
+ *   ),
+ *
  *   @OA\Tag(
  *     name="Console",
  *     description="脚本操作",

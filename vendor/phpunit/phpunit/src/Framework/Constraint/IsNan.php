@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -24,7 +24,7 @@ class IsNan extends Constraint
      */
     protected function matches($other)
     {
-        return is_nan($other);
+        return \is_nan($other);
     }
 
     /**

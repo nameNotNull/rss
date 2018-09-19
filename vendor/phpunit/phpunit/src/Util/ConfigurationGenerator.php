@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -10,8 +10,6 @@
 
 namespace PHPUnit\Util;
 
-/**
- */
 class ConfigurationGenerator
 {
     /**
@@ -50,7 +48,7 @@ EOT;
      */
     public function generateDefaultConfiguration($phpunitVersion, $bootstrapScript, $testsDirectory, $srcDirectory)
     {
-        return str_replace(
+        return \str_replace(
             [
                 '{phpunit_version}',
                 '{bootstrap_script}',

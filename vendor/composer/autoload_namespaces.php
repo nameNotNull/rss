@@ -10,6 +10,7 @@ return array(
     'Service' => array($baseDir . '/application/models'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Enums' => array($baseDir . '/application/library'),
+    'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Dao' => array($baseDir . '/application/models'),
     'BaconQrCode' => array($vendorDir . '/bacon/bacon-qr-code/src'),
 );

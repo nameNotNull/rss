@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -52,7 +52,7 @@ class JsonMatchesErrorMessageProvider
      */
     public static function translateTypeToPrefix($type)
     {
-        switch (strtolower($type)) {
+        switch (\strtolower($type)) {
             case 'expected':
                 $prefix = 'Expected value JSON decode error - ';
                 break;

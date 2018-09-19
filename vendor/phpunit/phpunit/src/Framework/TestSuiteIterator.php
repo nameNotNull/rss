@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -49,7 +49,7 @@ class TestSuiteIterator implements RecursiveIterator
      */
     public function valid()
     {
-        return $this->position < count($this->tests);
+        return $this->position < \count($this->tests);
     }
 
     /**

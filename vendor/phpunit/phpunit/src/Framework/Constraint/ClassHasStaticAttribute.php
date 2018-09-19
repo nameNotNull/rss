@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -35,9 +35,9 @@ class ClassHasStaticAttribute extends ClassHasAttribute
             $attribute = $class->getProperty($this->attributeName);
 
             return $attribute->isStatic();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -47,7 +47,7 @@ class ClassHasStaticAttribute extends ClassHasAttribute
      */
     public function toString()
     {
-        return sprintf(
+        return \sprintf(
             'has static attribute "%s"',
             $this->attributeName
         );

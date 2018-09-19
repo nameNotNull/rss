@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of PHPUnit.
  *
@@ -22,7 +22,7 @@ class Type
      */
     public static function isType($type)
     {
-        return in_array(
+        return \in_array(
             $type,
             [
                 'numeric',
