@@ -4,8 +4,8 @@
 /**
  *   @OA\Info(
  *     version="1.0",
- *     title="xxx.xxx.xxx",
- *     description="接口文档, V1.0.<br>"
+ *     title="yaf脚手架接口文档",
+ *     description="api接口文档, V1.0.<br>"
  *   ),
  *
  *   @OA\Server(
