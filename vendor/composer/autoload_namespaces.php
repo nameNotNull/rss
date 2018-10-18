@@ -12,5 +12,6 @@ return array(
     'Enums' => array($baseDir . '/application/library'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Dao' => array($baseDir . '/application/models'),
+    'Business' => array($baseDir . '/application'),
     'BaconQrCode' => array($vendorDir . '/bacon/bacon-qr-code/src'),
 );

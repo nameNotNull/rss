@@ -286,6 +286,10 @@ class ComposerStaticInite28b7f199671f7e67e6d000264133d25
         ),
         'B' => 
         array (
+            'Business' => 
+            array (
+                0 => __DIR__ . '/../..' . '/application',
+            ),
             'BaconQrCode' => 
             array (
                 0 => __DIR__ . '/..' . '/bacon/bacon-qr-code/src',
@@ -295,6 +299,8 @@ class ComposerStaticInite28b7f199671f7e67e6d000264133d25
 
     public static $classMap = array (
         'Default_Plugin' => __DIR__ . '/../..' . '/application/plugins/Default.php',
+        'Feed' => __DIR__ . '/..' . '/dg/rss-php/src/Feed.php',
+        'FeedException' => __DIR__ . '/..' . '/dg/rss-php/src/Feed.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
@@ -467,7 +473,7 @@ class ComposerStaticInite28b7f199671f7e67e6d000264133d25
         'PHPUnit\\Util\\TestDox\\XmlResultPrinter' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/TestDox/XmlResultPrinter.php',
         'PHPUnit\\Util\\TextTestListRenderer' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/TextTestListRenderer.php',
         'PHPUnit\\Util\\Type' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Type.php',
-        'PHPUnit\\Util\\Xml' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml.php',
+        'PHPUnit\\Util\\Xml' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/XML.php',
         'PHPUnit\\Util\\XmlTestListRenderer' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/XmlTestListRenderer.php',
         'PHPUnit_Framework_MockObject_MockObject' => __DIR__ . '/..' . '/phpunit/phpunit-mock-objects/src/MockObject.php',
         'PHP_Timer' => __DIR__ . '/..' . '/phpunit/php-timer/src/Timer.php',

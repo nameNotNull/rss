@@ -4,6 +4,6 @@ namespace Enums;
 
 class Cache
 {
-    const USER_INFO_KEY_TEMPLATE = 'aa:%s';
-    const USER_INFO_EXPIRE_TIME  = 10 * 60;
+    const RSS_KEY_TEMPLATE = 'RSS:%s_%s';
+    const RSS_EXPIRE_TIME  = 10 * 60;
 }
