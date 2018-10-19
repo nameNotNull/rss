@@ -1,19 +1,14 @@
-Initial Project
+Rss
 ==========
 
+Rss是一个方便扩展Rss订阅源的api项目。目前收集了知乎，更多订阅源尽请期待。
 
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://img.shields.io/travis/sebastianbergmann/phpunit/master.svg?style=flat-square)](https://phpunit.de/build-status.html)
+[![Minimum PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-brightgreen.svg)](https://php.net/)
+[![Stable](https://img.shields.io/badge/Rss-Stable-brightgreen.svg)](https://namenotnull.github.com/mp_rss)
 
-[npm-image]: https://img.shields.io/npm/v/anyproxy.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/anyproxy
-[node-url]: http://nodejs.org/download/
-[download-image]: https://img.shields.io/npm/dm/anyproxy.svg?style=flat-square
-[download-url]: https://npmjs.org/package/anyproxy
 
-Initial Project 是基于yaf的一个php框架，集成了illuminate/database、illuminate/validation、monolog/monolog等第三方库，并且可以使用composer灵活扩展的一个项目初始demo。此外，本项目还支持swagger自动生成api文档。
 
-> 本脚手架实际是综合api、swagger文档两个站点的集成。nginx需配置两个host:api和swagger文档。
+兄弟项目： [小程序Rss](https://namenotnull.github.com/mp_rss)
 
 Requirements
 ------------
@@ -22,56 +17,71 @@ Requirements
 
 特性
 ------------
-* 实现了mysql的model层开发，集成eloquent的ORM
-* 支持输入参数的验证
-* 支持各级别日志
-* 集成单元测试demo
-* 集成swagger的ui站点及自动生成
-* 中文文档：
-    * [yaf的项目脚手架](https://namenotnull.github.io/blog/)
+* 支持xml转化为json格式的response
+* 工厂模式方便扩展不同Rss来源
+* 支持cache
+* api中文文档：
+    * [Rss订阅](https://namenotnull.github.io/blog/)
+* 小程序中文文档：
+    * [小程序Rss订阅](https://namenotnull.github.io/blog/)
 
 # 最简配置
 
-## db 配置
+## cache 配置
 
-> 按照config/database.ini配置文件，自行更改host等配置创建 test数据库的test表
-
+> 配置config/cache.ini配置文件,并开启本地redis服务
 ```
-CREATE TABLE `test` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '用户名',
-  `user_id` bigint(20) NOT NULL COMMENT '用户id',
-  `mobile` varchar(11) NOT NULL DEFAULT '',
-  `address` varchar(20) NOT NULL DEFAULT '' COMMENT '住址',
-  `status` tinyint(3) unsigned NOT NULL COMMENT '状态',
-  `create_time` datetime DEFAULT NULL,
-  `modify_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4
+[product]
+redis.default.enable = On
+redis.default.write.enable = On
+redis.default.write.host = "127.0.0.1"
+redis.default.write.port = "6379"
+redis.default.write.database = "0"
+redis.default.write.timeout = "1"
+redis.default.read.enable = On
+redis.default.read.host = "127.0.0.1"
+redis.default.read.port = "6379"
+redis.default.read.database = "0"
+redis.default.read.timeout = "1"
+
+[product-aws]
+
+
+[develop:product]
+
+
+[test]
+
+
+[test-auto:test]
+
+[preline]
+
+
 ```
 
 ## api nginx配置
 ```
- server {
-     listen 80;
-     server_name initial.project.dev.com;
-     root /data/www/develop/initial_project/htdocs;
-     access_log /data/logs/initial.project.dev.com-error_log  main;
-     error_log  /data/logs/initial.project.dev.com-error_log;
-     add_header Access-Control-Allow-Origin *;
-     add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
-
-     add_header Engine 'PHP';
-
-     rewrite "^/(.*)" /index.php/$1 last;
-
-     location  / {
-         include tengine.fastcgi_params;
-         fastcgi_pass 127.0.0.1:9000;
-         fastcgi_param  REQUEST_URI  $request_uri;
-     }
-
- }
+  server {
+       listen 80;
+       server_name rss.dev.com;
+       root /data/www/develop/rss/htdocs;
+       access_log /data/logs/rss.dev.com-error_log  main;
+       error_log  /data/logs/rss.dev.com-error_log;
+       add_header Access-Control-Allow-Origin *;
+       add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+ 
+       add_header Engine 'PHP';
+ 
+       rewrite "^/(.*)" /index.php/$1 last;
+ 
+       location  / {
+           include tengine.fastcgi_params;
+           fastcgi_pass 127.0.0.1:9000;
+           fastcgi_param  REQUEST_URI  $request_uri;
+       }
+ 
+   }
 
 ```
 
@@ -112,79 +122,15 @@ CREATE TABLE `test` (
 
 一个合规的http请求:
 ```
-http://initial.project.dev.com/test/show.json?user_id=123
+http:///rss/search.json?source=zhihu&type=hotlist
 ```
-
-
-
-
-
-# 使用swagger模块
-
-
-## swagger 文档站点nginx配置
-```
- server {
-     listen 80;
-     server_name swagger.dev.com;
-     root /data/www/develop/initial_project/swagger-ui/dist;
-     access_log /data/logs/swagger.dev.com-error_log  main;
-     error_log  /data/logs/swagger.dev.com-error_log;
-
-     add_header Engine 'PHP';
-     location / {
-         index index.html index.htm;
-     }
- }
-```
-
-## 修改swagger配置
-
-> 指定 swagger测试的host
-
-```
- *   @OA\Server(
- *     url="http://initial.project.dev.com/",
- *     description="在线测试Host",
- *   ),
-```
-
-## openapi配置文件生成
-
-> 执行下面脚本，会在swagger-ui/dist目录下生成一个openapi.json文件，可以将命令加入到crontab里，自动执行文档生成
-
-
-```
-php /data/www/develop/initial_project/htdocs/console.php request_uri="/console/swagger/create/parameter"
-
-```
-
-## 指定swager的文档显示json文件
-
-> 修改 swagger-ui/dist 目录下 index.html 指定的json文件为上一步生成的openapi.json文件
-
-![https://github.com/nameNotNull/initial_project/blob/master/resources/swagger_index.png](https://github.com/nameNotNull/initial_project/blob/master/resource/swagger_index.png)
-
-![https://github.com/nameNotNull/initial_project/blob/master/resources/swagger.png](https://github.com/nameNotNull/initial_project/blob/master/resource/swagger.png)
-
-
-
-
-
-# 使用集成的单元测试模块
-```
-php ./vendor/bin/phpunit tests/test.php 
-```
->执行结果如下
-
-![https://github.com/nameNotNull/initial_project/blob/master/resources/phpunit.png](https://github.com/nameNotNull/initial_project/blob/master/resource/phpunit.png)
 
 
 
 Contact
 -----------------
 
-* Please feel free to [raise issue](https://github.com/nameNotNull/initial_project/issues), or give us some advice. :)
+* Please feel free to [raise issue](https://github.com/nameNotNull/rss/issues), or give us some advice. :)
 
 
 
