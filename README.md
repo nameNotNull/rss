@@ -4,11 +4,11 @@ Rss
 Rss是一个方便扩展Rss订阅源的api项目。目前收集了知乎，更多订阅源尽请期待。
 
 [![Minimum PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.0-brightgreen.svg)](https://php.net/)
-[![Stable](https://img.shields.io/badge/Rss-Stable-brightgreen.svg)](https://namenotnull.github.com/mp_rss)
+[![Stable](https://img.shields.io/badge/Rss-Stable-brightgreen.svg)](https://github.com/nameNotNull/mp_rss)
 
 
 
-兄弟项目： [小程序Rss](https://namenotnull.github.com/mp_rss)
+兄弟项目： [小程序Rss](https://github.com/nameNotNull/mp_rss)
 
 Requirements
 ------------
