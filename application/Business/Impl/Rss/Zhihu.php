@@ -45,7 +45,6 @@ class Zhihu extends \Business\Base\Rss
             }
             $result = array_values($result);
         }
-
         return $result;
     }
 
