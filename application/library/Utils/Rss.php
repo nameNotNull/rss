@@ -1,7 +1,9 @@
 <?php
 
 namespace Utils;
+
 use Utils\FeedException as FeedException;
+
 /**
  * RSS for PHP - small and easy-to-use library for consuming an RSS Feed
  *
@@ -23,9 +25,11 @@ class Rss
 
     /**
      * Loads RSS or Atom feed.
+     *
      * @param  string
      * @param  string
      * @param  string
+     *
      * @return Feed
      * @throws FeedException
      */
@@ -42,9 +46,11 @@ class Rss
 
     /**
      * Loads RSS feed.
+     *
      * @param  string  RSS feed URL
      * @param  string  optional user name
      * @param  string  optional password
+     *
      * @return Feed
      * @throws FeedException
      */
@@ -56,9 +62,11 @@ class Rss
 
     /**
      * Loads Atom feed.
+     *
      * @param  string  Atom feed URL
      * @param  string  optional user name
      * @param  string  optional password
+     *
      * @return Feed
      * @throws FeedException
      */
@@ -87,17 +95,16 @@ class Rss
                 $item->timestamp = strtotime($item->pubDate);
             }
         }
-        $feed = new self;
+        $feed      = new self;
         $feed->xml = $xml->channel;
+
         return $feed;
     }
 
 
     private static function fromAtom(\SimpleXMLElement $xml)
     {
-        if (!in_array('http://www.w3.org/2005/Atom', $xml->getDocNamespaces(), true)
-            && !in_array('http://purl.org/atom/ns#', $xml->getDocNamespaces(), true)
-        ) {
+        if (!in_array('http://www.w3.org/2005/Atom', $xml->getDocNamespaces(), true) && !in_array('http://purl.org/atom/ns#', $xml->getDocNamespaces(), true)) {
             throw new FeedException('Invalid feed.');
         }
 
@@ -105,15 +112,18 @@ class Rss
         foreach ($xml->entry as $entry) {
             $entry->timestamp = strtotime($entry->updated);
         }
-        $feed = new self;
+        $feed      = new self;
         $feed->xml = $xml;
+
         return $feed;
     }
 
 
     /**
      * Returns property value. Do not call directly.
+     *
      * @param  string  tag name
+     *
      * @return SimpleXMLElement
      */
     public function __get($name)
@@ -124,8 +134,10 @@ class Rss
 
     /**
      * Sets value of a property. Do not call directly.
+     *
      * @param  string  property name
      * @param  mixed   property value
+     *
      * @return void
      */
     public function __set($name, $value)
@@ -136,7 +148,9 @@ class Rss
 
     /**
      * Converts a SimpleXMLElement into an array.
+     *
      * @param  SimpleXMLElement
+     *
      * @return array
      */
     public function toArray(\SimpleXMLElement $xml = null)
@@ -146,10 +160,10 @@ class Rss
         }
 
         if (!$xml->children()) {
-            return (string) $xml;
+            return (string)$xml;
         }
 
-        $arr = array();
+        $arr = [];
         foreach ($xml->children() as $tag => $child) {
             if (count($xml->$tag) === 1) {
                 $arr[$tag] = $this->toArray($child);
@@ -164,21 +178,20 @@ class Rss
 
     /**
      * Load XML from cache or HTTP.
+     *
      * @param  string
      * @param  string
      * @param  string
+     *
      * @return SimpleXMLElement
      * @throws FeedException
      */
     private static function loadXml($url, $user, $pass)
     {
-        $e = self::$cacheExpire;
+        $e         = self::$cacheExpire;
         $cacheFile = self::$cacheDir . '/feed.' . md5(serialize(func_get_args())) . '.xml';
 
-        if (self::$cacheDir
-            && (time() - @filemtime($cacheFile) <= (is_string($e) ? strtotime($e) - time() : $e))
-            && $data = @file_get_contents($cacheFile)
-        ) {
+        if (self::$cacheDir && (time() - @filemtime($cacheFile) <= (is_string($e) ? strtotime($e) - time() : $e)) && $data = @file_get_contents($cacheFile)) {
             // ok
         } elseif ($data = trim(self::httpRequest($url, $user, $pass))) {
             if (self::$cacheDir) {
@@ -196,13 +209,15 @@ class Rss
 
     /**
      * Process HTTP request.
+     *
      * @param  string
      * @param  string
      * @param  string
+     *
      * @return string|false
      * @throws FeedException
      */
-    private static function httpRequest($url, $user, $pass)
+    public static function httpRequest($url, $user = '', $pass = '')
     {
         if (extension_loaded('curl')) {
             $curl = curl_init();
@@ -218,9 +233,8 @@ class Rss
                 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true); // sometime is useful :)
             }
             $result = curl_exec($curl);
-            return curl_errno($curl) === 0 && curl_getinfo($curl, CURLINFO_HTTP_CODE) === 200
-                ? $result
-                : false;
+
+            return curl_errno($curl) === 0 && curl_getinfo($curl, CURLINFO_HTTP_CODE) === 200 ? $result : false;
 
         } elseif ($user === null && $pass === null) {
             return file_get_contents($url);
@@ -233,7 +247,9 @@ class Rss
 
     /**
      * Generates better accessible namespaced tags.
+     *
      * @param  SimpleXMLElement
+     *
      * @return void
      */
     private static function adjustNamespaces($el)

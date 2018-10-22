@@ -1,25 +1,61 @@
 <?php
+
 namespace Business\Impl\Rss;
 
 use MobileApi\Util\Config;
 use Utils\Rss;
 
-class Zhihu extends \Business\Base\Rss {
+class Zhihu extends \Business\Base\Rss
+{
 
     protected function _load($type)
     {
-        $types  = Config::get('mapping.rss.zhihu.type');
+        $types = Config::get('mapping.rss.zhihu.types');
 
-        $url = Config::get('mapping.rss.zhihu.type.'.$type.'.url');
+        $url = Config::get('mapping.rss.zhihu.type.' . $type . '.url');
 
         $result = [];
-        if($type == $types['daily']){
-        }else{
-            $rss = Rss::loadRss($url);
-            $list = $rss->toArray();
-            $result = array_slice($list['item'],0,5);
+        if ($type == $types['daily']) {
+            $rss  = Rss::httpRequest($url);
+            $list = json_decode($rss, true);
+
+            foreach ($list['stories'] as $item) {
+                $tmp = [
+                    'id'      => $item['id'],
+                    'title'   => $item['title'],
+                    'content' => '<img referrerpolicy="no-referrer" src="' . $item['images'][0] . '">',
+                    'link'    => '',
+                ];
+                array_push($result, $tmp);
+            }
+            $result = array_values($result);
+
+        } else {
+            $rss    = Rss::loadRss($url);
+            $list   = $rss->toArray();
+            $result = array_slice($list['item'], 0, 5);
 
         }
+
+        return $result;
+    }
+
+    protected function _loadDetail($type, $id)
+    {
+
+        $url = 'https://news-at.zhihu.com/api/4/news/'.$id;
+
+
+        $rss  = Rss::httpRequest($url);
+        $list = json_decode($rss, true);
+
+        $result = [
+                'id'      => $list['id'],
+                'title'   => $list['title'],
+                'content' => $list['body'],
+                'css'    => $list['css'],
+                'head_img'    => $list['images'],
+            ];
 
         return $result;
     }

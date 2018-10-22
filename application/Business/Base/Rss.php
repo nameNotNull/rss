@@ -25,6 +25,13 @@ abstract class Rss
         return $this->_load($params);
     }
 
+    abstract protected function _loadDetail($type, $id);
+
+    final function loadDetail($type, $id)
+    {
+        return $this->_loadDetail($type, $id);
+    }
+
     final function valid()
     {
 
