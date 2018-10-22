@@ -33,8 +33,17 @@ class Zhihu extends \Business\Base\Rss
         } else {
             $rss    = Rss::loadRss($url);
             $list   = $rss->toArray();
-            $result = array_slice($list['item'], 0, 5);
-
+            $list = array_slice($list['item'], 0, 10);
+            foreach ($list as $item) {
+                $tmp = [
+                    'id'      => '',
+                    'title'   => $item['title'],
+                    'content' => $item['description'],
+                    'link'    => '',
+                ];
+                array_push($result, $tmp);
+            }
+            $result = array_values($result);
         }
 
         return $result;
