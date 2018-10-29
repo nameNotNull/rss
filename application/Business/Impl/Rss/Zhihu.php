@@ -23,6 +23,7 @@ class Zhihu extends \Business\Base\Rss
                 $tmp = [
                     'id'      => $item['id'],
                     'title'   => $item['title'],
+                    'images'   => $item['images'][0],
                     'content' => '<img referrerpolicy="no-referrer" src="' . $item['images'][0] . '">',
                     'link'    => '',
                 ];
