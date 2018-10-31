@@ -14,7 +14,7 @@ class Rss_Detail_Controller extends Base_Controller
 
         $cache = new Cache();
 
-        return $cache->remember(sprintf(CacheEnums::RSS_DETAIL_KEY_TEMPLATE, $source, $type), CacheEnums::RSS_DETAIL_EXPIRE_TIME, function () use ($source, $type, $id) {
+        return $cache->remember(sprintf(CacheEnums::RSS_DETAIL_KEY_TEMPLATE, $source, $type,$id), CacheEnums::RSS_DETAIL_EXPIRE_TIME, function () use ($source, $type, $id) {
 
             $rss = new \Business\Impl\Rss();
 
