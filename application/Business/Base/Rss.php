@@ -15,14 +15,14 @@ abstract class Rss
     }
 
 
-    abstract protected function _load($params);
+    abstract protected function _load($type,$page,$size);
 
-    final function load($params)
+    final function load($type,$page,$size)
     {
         $this->valid();
         $this->rule();
 
-        return $this->_load($params);
+        return $this->_load($type,$page,$size);
     }
 
     abstract protected function _loadDetail($type, $id);

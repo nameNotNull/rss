@@ -3,6 +3,7 @@
 namespace Business\Factory;
 
 use Business\Impl\Rss\Zhihu;
+use Business\Impl\Rss\Sina;
 use MobileApi\Util\Config;
 
 class Rss
@@ -32,10 +33,10 @@ class Rss
                 case ($sources['zhihu'] ?? ''):
                     $obj = new Zhihu();
                     break;
-                case ($sources['laosiji'] ?? ''):
-                    $obj = new Zhihu();
-                    break;
                 case ($sources['sina'] ?? ''):
+                    $obj = new Sina();
+                    break;
+                case ($sources['laosiji'] ?? ''):
                     $obj = new Zhihu();
                     break;
                 default:

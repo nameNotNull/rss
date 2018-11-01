@@ -5,26 +5,26 @@ namespace Business\Impl\Rss;
 use MobileApi\Util\Config;
 use Utils\Rss;
 
-class Zhihu extends \Business\Base\Rss
+class Sina extends \Business\Base\Rss
 {
 
     protected function _load($type, $page, $size)
     {
-        $types = Config::get('mapping.rss.zhihu.types');
+        $types = Config::get('mapping.rss.sina.types');
 
-        $url = Config::get('mapping.rss.zhihu.type.' . $type . '.url');
+        $url = Config::get('mapping.rss.sina.type.' . $type . '.url') . "?page={$page}&size={$size}";
 
         $result = [];
         if ($type == $types['daily']) {
             $rss  = Rss::httpRequest($url);
             $list = json_decode($rss, true);
 
-            foreach ($list['stories'] as $item) {
+            foreach ($list as $item) {
                 $tmp = [
-                    'id'      => $item['id'],
+                    'id'      => $item['newsId'],
                     'title'   => $item['title'],
-                    'images'  => $item['images'][0],
-                    'content' => '<img referrerpolicy="no-referrer" src="' . $item['images'][0] . '">',
+                    'images'  => $item['pic'],
+                    'content' => '<img referrerpolicy="no-referrer" src="' . $item['pic'] . '">',
                     'link'    => '',
                 ];
                 array_push($result, $tmp);
@@ -53,18 +53,22 @@ class Zhihu extends \Business\Base\Rss
     protected function _loadDetail($type, $id)
     {
 
-        $url = Config::get('mapping.rss.zhihu.type.' . $type . '.detailurl') . $id;
+        $url = Config::get('mapping.rss.sina.type.' . $type . '.detailurl') . $id;
 
-        $rss  = Rss::httpRequest($url);
-        $list = json_decode($rss, true);
+        $rss    = Rss::httpRequest($url);
+        $info   = json_decode($rss, true);
 
-        $result = [
-            'id'       => $list['id'],
-            'title'    => $list['title'],
-            'content'  => $list['body'],
-            'css'      => $list['css'],
-            'head_img' => $list['images'],
-        ];
+        $result = [];
+
+        if (!empty($info['data'])) {
+            $result = [
+                'id'       => $info['data']['newsId'],
+                'title'    => $info['data']['title'],
+                'content'  => $info['data']['content'],
+                'css'      => '',
+                'head_img' => $info['data']['pics'][0]?$info['data']['pics'][0]['data']['pic']:'',
+            ];
+        }
 
         return $result;
     }
