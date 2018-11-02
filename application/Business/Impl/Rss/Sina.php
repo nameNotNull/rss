@@ -26,6 +26,7 @@ class Sina extends \Business\Base\Rss
                     'images'  => $item['pic'],
                     'content' => '<img referrerpolicy="no-referrer" src="' . $item['pic'] . '">',
                     'link'    => '',
+                    'source'    => 'sina',
                 ];
                 array_push($result, $tmp);
             }
