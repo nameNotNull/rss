@@ -41,6 +41,7 @@ class Sina extends \Business\Base\Rss
                     'title'   => $item['title'],
                     'content' => $item['description'],
                     'link'    => '',
+                    'source'    => $type,
                 ];
                 array_push($result, $tmp);
             }
