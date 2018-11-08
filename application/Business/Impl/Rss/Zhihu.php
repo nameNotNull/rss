@@ -19,14 +19,14 @@ class Zhihu extends \Business\Base\Rss
             $rss  = Rss::httpRequest($url);
             $list = json_decode($rss, true);
 
-            foreach ($list['stories'] as $item) {
+            foreach ($list['data'] as $item) {
                 $tmp = [
-                    'id'      => $item['id'],
-                    'title'   => $item['title'],
-                    'images'  => $item['images'][0],
-                    'content' => '<img referrerpolicy="no-referrer" src="' . $item['images'][0] . '">',
+                    'id'      => substr($item['card_id'], 2),
+                    'title'   => $item['target']['title_area']['text'],
+                    'images'  => $item['target']['image_area']['url'],
+                    'content' => '<img referrerpolicy="no-referrer" src="' . $item['target']['image_area']['url'] . '">',
                     'link'    => '',
-                    'source'    => 'zhihu',
+                    'source'  => 'zhihu',
                 ];
                 array_push($result, $tmp);
             }
@@ -54,21 +54,31 @@ class Zhihu extends \Business\Base\Rss
     protected function _loadDetail($type, $id)
     {
 
-        $url = Config::get('mapping.rss.zhihu.type.' . $type . '.detailurl') . $id;
+        $url = Config::get('mapping.rss.zhihu.type.' . $type . '.answersurl');
 
-        $rss  = Rss::httpRequest($url);
+        $url  = str_replace("xxxxxx", $id, $url);
+        $rss  = file_get_contents($url);
         $list = json_decode($rss, true);
 
+        $content = '';
+        if (!empty($list['data'][0])) {
+            $detailUrl  = Config::get('mapping.rss.zhihu.type.' . $type . '.detailurl');
+            $detail     = file_get_contents(str_replace("xxxxxx", $list['data'][0]['id'], $detailUrl));
+            $detailInfo = json_decode($detail, true);
+            $content    = $detailInfo['content'];
+        }
         $result = [
-            'id'       => $list['id'],
-            'title'    => $list['title'],
-            'content'  => $list['body'],
-            'css'      => $list['css'],
-            'head_img' => $list['images'],
+            'id'       => '',
+            'title'    => '',
+            'content'  => $content,
+            'css'      => '',
+            'head_img' => '',
         ];
 
         return $result;
     }
+
+
 
     protected function rule()
     {

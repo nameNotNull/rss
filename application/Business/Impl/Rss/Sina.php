@@ -26,7 +26,7 @@ class Sina extends \Business\Base\Rss
                     'images'  => $item['pic'],
                     'content' => '<img referrerpolicy="no-referrer" src="' . $item['pic'] . '">',
                     'link'    => '',
-                    'source'    => 'sina',
+                    'source'  => 'sina',
                 ];
                 array_push($result, $tmp);
             }
@@ -42,7 +42,7 @@ class Sina extends \Business\Base\Rss
                     'title'   => $item['title'],
                     'content' => $item['description'],
                     'link'    => '',
-                    'source'    => $type,
+                    'source'  => $type,
                 ];
                 array_push($result, $tmp);
             }
@@ -57,8 +57,8 @@ class Sina extends \Business\Base\Rss
 
         $url = Config::get('mapping.rss.sina.type.' . $type . '.detailurl') . $id;
 
-        $rss    = Rss::httpRequest($url);
-        $info   = json_decode($rss, true);
+        $rss  = Rss::httpRequest($url);
+        $info = json_decode($rss, true);
 
         $result = [];
 
@@ -68,7 +68,7 @@ class Sina extends \Business\Base\Rss
                 'title'    => $info['data']['title'],
                 'content'  => $info['data']['content'],
                 'css'      => '',
-                'head_img' => $info['data']['pics'][0]?$info['data']['pics'][0]['data']['pic']:'',
+                'head_img' => $info['data']['pics'][0] ? $info['data']['pics'][0]['data']['pic'] : '',
             ];
         }
 

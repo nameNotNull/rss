@@ -32,6 +32,7 @@ abstract class Rss
         return $this->_loadDetail($type, $id);
     }
 
+
     final function valid()
     {
 

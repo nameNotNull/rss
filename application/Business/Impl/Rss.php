@@ -11,10 +11,11 @@ class Rss
         return $obj->load($type, $page, $size);
     }
 
-    function loadRssDetail($source, $type, $id)
+    function loadDetail($source, $type, $id)
     {
         $obj = \Business\Factory\Rss::create($source);
 
         return $obj->loadDetail($type, $id);
     }
+
 }
