@@ -23,8 +23,13 @@ class Toutiao extends \Business\Base\Rss
             foreach ($list['data'] as $item) {
                 $content = json_decode($item['content'], true);
                 $img     = $content['middle_image']['url'] ?? '';
-                $tmp     = [
-                    'id'      => $content['group_id'] ?? '',
+                preg_match('/.*\/(\d+)\//', $content['display_url'], $match);
+                $id = 0;
+                if (!empty($match) && !empty($match[1])) {
+                    $id = $match[1];
+                }
+                $tmp = [
+                    'id'      => $id,
                     'title'   => $content['title'] ?? '',
                     'images'  => $img,
                     'content' => '<img referrerpolicy="no-referrer" src="' . $img . '">',
@@ -64,11 +69,25 @@ class Toutiao extends \Business\Base\Rss
 
         $result = [];
 
+        $content = '';
+
         if (!empty($info['data'])) {
+            $contentList = is_array($info['data']['content']) ? $info['data']['content'] : '';
+            if (!empty($contentList)) {
+                foreach ($contentList as $item) {
+                    if (is_array($item)) {
+                        $text = '<img referrerpolicy="no-referrer" src="' . $item['info']['src'] . '">';
+                    } else {
+                        $text = '<p>' . $item . '</p>';
+                    }
+                    $content .= $text;
+                }
+
+            }
             $result = [
                 'id'       => '',
                 'title'    => $info['data']['title'] ?? '',
-                'content'  => implode(',', $info['data']['content']),
+                'content'  => $content,
                 'css'      => '',
                 'head_img' => '',
             ];
