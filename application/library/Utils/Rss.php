@@ -225,9 +225,9 @@ class Rss
             if ($user !== null || $pass !== null) {
                 curl_setopt($curl, CURLOPT_USERPWD, "$user:$pass");
             }
-//            $headers[] = 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:28.0) Gecko/20100101 Firefox/28.0';
+            $headers[] = 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:28.0) Gecko/20100101 Firefox/28.0';
 
-//            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_TIMEOUT, 20);
             curl_setopt($curl, CURLOPT_ENCODING, '');

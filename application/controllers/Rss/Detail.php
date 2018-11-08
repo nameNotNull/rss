@@ -18,7 +18,7 @@ class Rss_Detail_Controller extends Base_Controller
 
             $rss = new \Business\Impl\Rss();
 
-            $data = $rss->loadRssDetail($source, $type, $id);
+            $data = $rss->loadDetail($source, $type, $id);
 
             return $data;
         });
