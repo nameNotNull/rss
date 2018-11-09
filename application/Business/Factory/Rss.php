@@ -3,6 +3,7 @@
 namespace Business\Factory;
 
 use Business\Impl\Rss\Toutiao;
+use Business\Impl\Rss\Wangyi;
 use Business\Impl\Rss\Zhihu;
 use Business\Impl\Rss\Sina;
 use MobileApi\Util\Config;
@@ -39,6 +40,9 @@ class Rss
                     break;
                 case ($sources['toutiao'] ?? ''):
                     $obj = new Toutiao();
+                    break;
+                case ($sources['wangyi'] ?? ''):
+                    $obj = new Wangyi();
                     break;
                 default:
                     $obj = new Zhihu();

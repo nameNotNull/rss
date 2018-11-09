@@ -31,7 +31,7 @@ class Toutiao extends \Business\Base\Rss
                 $tmp = [
                     'id'           => $id,
                     'title'        => mb_strlen($content['title']) > 40 ? mb_substr($content['title'], 0, 40) . '...' : $content['title'],
-                    'images'       => empty($img) ? false : $img,
+                    'images'       => empty($img) ? '' : $img,
                     'content'      => '<img referrerpolicy="no-referrer" src="' . $img . '">',
                     'link'         => '',
                     'source'       => 'toutiao',
