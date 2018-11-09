@@ -27,6 +27,9 @@ class Sina extends \Business\Base\Rss
                     'content' => '<img referrerpolicy="no-referrer" src="' . $item['pic'] . '">',
                     'link'    => '',
                     'source'  => 'sina',
+                    'read_num'     => '',
+                    'publish_time' => '',
+                    'source_child' => $item['source'],
                 ];
                 array_push($result, $tmp);
             }

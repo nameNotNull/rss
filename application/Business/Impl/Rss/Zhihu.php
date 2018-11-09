@@ -27,6 +27,9 @@ class Zhihu extends \Business\Base\Rss
                     'content' => '<img referrerpolicy="no-referrer" src="' . $item['target']['image_area']['url'] . '">',
                     'link'    => '',
                     'source'  => 'zhihu',
+                    'read_num'     => $item['target']['metrics_area']['text'] ?? 0,
+                    'publish_time' => '',
+                    'source_child' => '',
                 ];
                 array_push($result, $tmp);
             }

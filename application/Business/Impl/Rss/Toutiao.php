@@ -29,12 +29,15 @@ class Toutiao extends \Business\Base\Rss
                     $id = $match[1];
                 }
                 $tmp = [
-                    'id'      => $id,
-                    'title'   => $content['title'] ?? '',
-                    'images'  => $img,
-                    'content' => '<img referrerpolicy="no-referrer" src="' . $img . '">',
-                    'link'    => '',
-                    'source'  => 'toutiao',
+                    'id'           => $id,
+                    'title'        => mb_strlen($content['title']) > 40 ? mb_substr($content['title'], 0, 40) . '...' : $content['title'],
+                    'images'       => empty($img) ? false : $img,
+                    'content'      => '<img referrerpolicy="no-referrer" src="' . $img . '">',
+                    'link'         => '',
+                    'source'       => 'toutiao',
+                    'read_num'     => '阅读量'.$content['read_count'] ?? '',
+                    'publish_time' => $content['publish_time'] ? date('Y-m-d H:i:s', $content['publish_time']) : '',
+                    'source_child' => $content['source'] ?? '',
                 ];
                 array_push($result, $tmp);
             }
