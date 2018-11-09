@@ -22,7 +22,7 @@ class Toutiao extends \Business\Base\Rss
 
             foreach ($list['data'] as $item) {
                 $content = json_decode($item['content'], true);
-                $img     = isset($content['image_list']) & isset($content['image_list'][0]) ? $content['image_list']['0']['url'] : '';
+                $img     = isset($content['image_list']) & isset($content['image_list'][0]) ? substr($content['image_list']['0']['url'], 0, strlen($content['image_list']['0']['url']) - 5) : '';
                 preg_match('/.*\/(\d+)\//', $content['display_url'], $match);
                 $id = 0;
                 if (!empty($match) && !empty($match[1])) {
